@@ -25,4 +25,8 @@ describe('MockFailingCartService service', () => {
             []
         );
     });
+
+    test('should fail to add product on first try', () => {
+        expect(() => cartService.addProductToCart('test')).rejects.toThrow();
+    });
 });
