@@ -29,4 +29,14 @@ describe('MockFailingCartService service', () => {
     test('should fail to add product on first try', () => {
         expect(() => cartService.addProductToCart('test')).rejects.toThrow();
     });
+
+    test('should add product on second try', async () => {
+        await expect(() =>
+            cartService.addProductToCart('test')
+        ).rejects.toThrow();
+
+        await expect(cartService.addProductToCart('test')).resolves.toEqual(
+            expect.objectContaining({ title: 'test' })
+        );
+    });
 });
