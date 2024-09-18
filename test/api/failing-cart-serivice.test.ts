@@ -21,9 +21,7 @@ describe('MockFailingCartService service', () => {
     test('should return products on second try', async () => {
         await expect(() => cartService.getProductsInCart()).rejects.toThrow();
 
-        await expect(cartService.getProductsInCart()).resolves.toStrictEqual(
-            []
-        );
+        await expect(cartService.getProductsInCart()).resolves.toEqual([]);
     });
 
     test('should fail to add product on first try', () => {
