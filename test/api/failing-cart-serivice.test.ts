@@ -5,4 +5,9 @@ describe('MockFailingCartService service', () => {
         const cartService = new MockFailingCartService();
         expect(cartService).toBeDefined();
     });
+
+    test('should fail getProductsInCart on first try', () => {
+        const cartService = new MockFailingCartService();
+        expect(() => cartService.getProductsInCart()).rejects.toThrow();
+    });
 });
