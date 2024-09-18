@@ -1,7 +1,7 @@
 import { withQueryProvider } from '../../../src/app/providers/with-query-provider';
 import { renderHook, waitFor } from '@testing-library/react';
-import { useCartProducts } from '../../../src/feat/get-cart/lib/hooks/use-cart-products';
 import { PropsWithChildren } from 'react';
+import { useCartProducts } from '../../../src/feat/get-cart';
 
 const Wrapper = withQueryProvider(({ children }: PropsWithChildren) => (
     <>{children}</>
