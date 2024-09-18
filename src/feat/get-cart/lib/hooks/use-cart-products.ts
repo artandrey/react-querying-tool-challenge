@@ -2,7 +2,7 @@ import { Product } from '../../../../shared/api/cart-service';
 
 export type UseCartResult = {
     isLoading: boolean;
-    data: Product[] | undefined;
+    data: Readonly<Product[]> | undefined;
     isError: boolean;
 };
 
