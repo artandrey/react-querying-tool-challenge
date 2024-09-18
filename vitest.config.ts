@@ -4,5 +4,6 @@ export default defineVitestConfig({
     test: {
         globals: true,
         testTimeout: 10000,
+        environment: 'jsdom',
     },
 });

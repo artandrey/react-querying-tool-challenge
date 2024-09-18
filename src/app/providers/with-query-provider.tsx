@@ -1,8 +1,12 @@
-export const withQueryProvider = (Component: React.ComponentType) => () => {
-    // wrap your app into query provider
-    return (
-        <>
-            <Component />
-        </>
-    );
-};
+import React from 'react';
+
+export const withQueryProvider =
+    <P extends object>(Component: React.ComponentType<P>) =>
+    ({ ...props }: P) => {
+        // wrap your app into query provider
+        return (
+            <>
+                <Component {...props} />
+            </>
+        );
+    };
