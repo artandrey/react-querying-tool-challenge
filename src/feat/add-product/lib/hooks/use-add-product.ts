@@ -1,6 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '../../../../shared/api';
-import { Product } from '../../../../shared/api/cart-service';
+import { useAddProductToCartMutation } from '../../../../entities/cart';
 
 export type UseAddProductResult = {
     isLoading: boolean;
@@ -8,19 +6,11 @@ export type UseAddProductResult = {
 };
 
 export const useAddProduct = (): UseAddProductResult => {
-    const queryClient = useQueryClient();
-
-    const { mutateAsync, isPending } = useMutation({
-        mutationFn: (title: string) => api().cart.addProductToCart(title),
-        onSuccess: (data) =>
-            queryClient.setQueryData<Readonly<Product[]>>(['cart'], (old) =>
-                old ? [...old, data] : undefined
-            ),
-    });
+    const [addProduct, { isLoading }] = useAddProductToCartMutation();
 
     const execute = async (title: string) => {
-        await mutateAsync(title);
+        await addProduct(title);
     };
 
-    return { isLoading: isPending, execute };
+    return { isLoading, execute };
 };

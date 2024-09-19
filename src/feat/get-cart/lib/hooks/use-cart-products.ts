@@ -1,6 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
+import { useGetCartProductsQuery } from '../../../../entities/cart';
 import { Product } from '../../../../shared/api/cart-service';
-import { api } from '../../../../shared/api';
 
 export type UseCartResult = {
     isLoading: boolean;
@@ -9,10 +8,7 @@ export type UseCartResult = {
 };
 
 export const useCartProducts = (): UseCartResult => {
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ['cart'],
-        queryFn: () => api().cart.getProductsInCart(),
-    });
+    const { data, isLoading, isError } = useGetCartProductsQuery();
 
-    return { data, isError, isLoading };
+    return { data, isLoading, isError };
 };

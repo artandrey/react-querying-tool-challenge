@@ -1,14 +1,13 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
-
-const queryClient = new QueryClient();
+import { Provider } from 'react-redux';
+import { store } from '../../store';
 
 export const withQueryProvider =
     <P extends object>(Component: React.ComponentType<P>) =>
-    ({ ...props }: P) => {
+    (props: P) => {
         return (
-            <QueryClientProvider client={queryClient}>
+            <Provider store={store}>
                 <Component {...props} />
-            </QueryClientProvider>
+            </Provider>
         );
     };

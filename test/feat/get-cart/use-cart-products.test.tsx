@@ -1,20 +1,24 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, waitFor } from '@testing-library/react';
-import { PropsWithChildren } from 'react';
+import { Provider } from 'react-redux';
+import { cleanup, renderHook, waitFor } from '@testing-library/react';
+import { act, PropsWithChildren } from 'react';
 import { useCartProducts } from '../../../src/feat/get-cart';
+import { cartApi } from '../../../src/entities/cart';
+import { setupStore } from '../../../src/store';
 import { MockFailingCartService } from '../../../src/shared/api/cart-service';
 
-const Wrapper = ({ children }: PropsWithChildren) => {
-    const queryClient = new QueryClient();
+const store = setupStore();
 
-    return (
-        <QueryClientProvider client={queryClient}>
-            {children}
-        </QueryClientProvider>
-    );
-};
+const Wrapper = ({ children }: PropsWithChildren) => (
+    <Provider store={store}>{children}</Provider>
+);
 
 describe('useCartProducts', () => {
+    afterEach(() => {
+        vi.clearAllMocks();
+        cleanup();
+        act(() => store.dispatch(cartApi.util.resetApiState()));
+    });
+
     test('to be initially in loading state', async () => {
         const { result } = renderHook(() => useCartProducts(), {
             wrapper: Wrapper,
@@ -32,17 +36,13 @@ describe('useCartProducts', () => {
         vi.spyOn(
             MockFailingCartService.prototype,
             'getProductsInCart'
-        ).mockResolvedValueOnce(mockProducts);
+        ).mockResolvedValue(mockProducts);
 
         const { result } = renderHook(() => useCartProducts(), {
             wrapper: Wrapper,
         });
+        await waitFor(() => expect(result.current.isLoading).toBe(false));
 
-        await waitFor(() => {
-            return result.current.isLoading === false;
-        });
-
-        expect(result.current.isLoading).toBe(false);
         expect(result.current.data).toEqual(mockProducts);
     });
 });
