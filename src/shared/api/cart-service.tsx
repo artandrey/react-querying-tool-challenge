@@ -13,13 +13,13 @@ export class MockFailingCartService implements ICartService {
     private readonly productsInCart: Product[] = [];
 
     public async getProductsInCart(): Promise<Readonly<Product[]>> {
-        await this.wait(400);
+        await this.wait(1500);
         this.maybeFail();
         return this.productsInCart;
     }
 
     public async addProductToCart(title: string): Promise<Readonly<Product>> {
-        await this.wait(200);
+        await this.wait(1000);
         this.maybeFail();
         const product = new Product(this.generateId(), title);
         this.productsInCart.push(product);
