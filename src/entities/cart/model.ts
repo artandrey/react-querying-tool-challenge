@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Product } from '../../shared/api/cart-service';
 import { api } from '../../shared/api';
+import { Product } from '../../shared/api/cart-service';
 
 export const cartApi = createApi({
     reducerPath: 'cartApi',
@@ -20,14 +20,18 @@ export const cartApi = createApi({
                 return { data };
             },
             async onQueryStarted(_title, { dispatch, queryFulfilled }) {
-                const product = await queryFulfilled;
-                dispatch(
-                    cartApi.util.updateQueryData(
-                        'getCartProducts',
-                        undefined,
-                        (draft) => [...draft, product.data]
-                    )
-                );
+                try {
+                    const product = await queryFulfilled;
+                    dispatch(
+                        cartApi.util.updateQueryData(
+                            'getCartProducts',
+                            undefined,
+                            (draft) => [...draft, product.data]
+                        )
+                    );
+                } catch (error) {
+                    console.error('Failed to update cart', error);
+                }
             },
         }),
     }),
