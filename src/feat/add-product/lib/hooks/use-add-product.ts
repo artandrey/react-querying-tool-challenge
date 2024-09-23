@@ -14,6 +14,7 @@ export const useAddProduct = (): UseAddProductResult => {
 
     const { mutateAsync, isPending } = useMutation({
         mutationFn: (title: string) => api().cart.addProductToCart(title),
+        retry: 2,
         onSuccess: (data) =>
             queryClient.setQueryData<Readonly<OptimisticProduct[]>>(
                 ['cart'],
