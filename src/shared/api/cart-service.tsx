@@ -40,12 +40,12 @@ export class MockFailingCartService implements ICartService {
     }
 
     private maybeFail() {
-        // if (this.shouldFail) {
-        //     this.shouldFail = false;
-        //     console.error('Cart action failed');
-        //     throw new Error('Cart action failed');
-        // } else {
-        //     this.shouldFail = true;
-        // }
+        if (this.shouldFail) {
+            this.shouldFail = false;
+            console.error('Cart action failed');
+            throw new Error('Cart action failed');
+        } else {
+            this.shouldFail = true;
+        }
     }
 }
