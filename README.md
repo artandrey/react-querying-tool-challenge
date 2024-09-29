@@ -52,7 +52,7 @@ Now that we know what’s causing the issue and how to solve it, it’s your tur
 
 [Check React Query assignment by this link](./react-query.md)
 
-[Check RTK Query assignment by this link]()
+[Check RTK Query assignment by this link](./rtk-query.md)
 
 ---
 

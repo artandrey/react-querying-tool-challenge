@@ -33,12 +33,6 @@ Run the following command to make sure all core logic for creating and adding pr
 pnpm run test:dev
 ```
 
-Ensure that your tests cover:
-
--   The retry mechanism for querying products
--   Retry logic for adding a product when it fails
--   The behavior of optimistic updates and product states
-
 #### Manual Testing of Optimistic Updates and Retries
 
 After implementing the hooks, manually test the optimistic update functionality and retry behavior in the application by running:
