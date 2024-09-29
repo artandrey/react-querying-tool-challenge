@@ -50,6 +50,10 @@ Now that we know what’s causing the issue and how to solve it, it’s your tur
 
 ### Assignment
 
+You will already have completed UI, only querying logic need to be implemented
+
+<img src="./pictures/example-ui.png" />
+
 [Check React Query assignment by this link](./react-query.md)
 
 [Check RTK Query assignment by this link](./rtk-query.md)
