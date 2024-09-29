@@ -48,6 +48,12 @@ Now that we know what’s causing the issue and how to solve it, it’s your tur
     - If the request to the server fails (e.g., due to a network timeout or server lag), implement automatic retries.
     - Try sending the request multiple times before showing an error message to the user.
 
+### Assignment
+
+[Check React Query assignment by this link](./react-query.md)
+
+[Check RTK Query assignment by this link]()
+
 ---
 
 By combining optimistic updates with retries, you'll turn a frustrating experience into a smooth, enjoyable one. Your users will feel like the app is responsive, even if the network or server isn’t cooperating perfectly. It’s a small change with a big impact on user satisfaction.
