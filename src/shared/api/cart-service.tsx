@@ -59,10 +59,6 @@ export class MockFailingCartService implements ICartService {
   public async getAvailableProducts(): Promise<Readonly<Product[]>> {
     await this.wait(300);
     this.maybeFail();
-    console.log(
-      'returning available products',
-      this.availableProducts.map((p) => p.title)
-    );
 
     return this.availableProducts.slice();
   }
