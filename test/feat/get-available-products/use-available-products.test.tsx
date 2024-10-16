@@ -1,21 +1,27 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, waitFor } from '@testing-library/react';
-import { PropsWithChildren } from 'react';
+import { cleanup, renderHook, waitFor } from '@testing-library/react';
+import { act, PropsWithChildren } from 'react';
+import { Provider } from 'react-redux';
 import { useAvailableProducts } from '../../../src/feat/get-available-products/lib/hooks/use-available-products';
 import {
   MockFailingCartService,
   Product,
 } from '../../../src/shared/api/cart-service';
+import { setupStore } from '../../../src/store';
+import { cartApi } from '../../../src/entities/cart';
 
-const Wrapper = ({ children }: PropsWithChildren) => {
-  const queryClient = new QueryClient();
+const store = setupStore();
 
-  return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+const Wrapper = ({ children }: PropsWithChildren) => (
+  <Provider store={store}>{children}</Provider>
+);
 
 describe('useAvailableProducts', () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+    cleanup();
+    act(() => store.dispatch(cartApi.util.resetApiState()));
+  });
+
   test('should be initially in loading state', () => {
     const { result } = renderHook(() => useAvailableProducts(), {
       wrapper: Wrapper,
@@ -26,8 +32,8 @@ describe('useAvailableProducts', () => {
 
   test('should load data', async () => {
     const mockProducts: Product[] = [
-      new Product(1, 'Product 1'),
-      new Product(2, 'Product 2'),
+      { id: 1, title: 'Product 1' },
+      { id: 2, title: 'Product 2' },
     ];
 
     vi.spyOn(
@@ -40,7 +46,7 @@ describe('useAvailableProducts', () => {
     });
 
     await waitFor(() => {
-      return result.current.isLoading === false;
+      return expect(result.current.isLoading).toBe(false);
     });
 
     expect(result.current.isLoading).toBe(false);
