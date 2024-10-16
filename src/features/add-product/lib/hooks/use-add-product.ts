@@ -1,4 +1,4 @@
-import { useAddProductToCartMutation } from '../../../../entities/cart';
+import { useAddProductToCartMutation } from '../../model/slice';
 import { Product } from '../../../../shared/api/cart-service';
 
 export type UseAddProductResult = {

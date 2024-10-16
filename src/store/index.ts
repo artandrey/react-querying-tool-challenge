@@ -1,16 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { cartApi } from '../entities/cart';
+import { cartApi } from '../entities/cart/model';
 
 export const setupStore = () => {
-    const store = configureStore({
-        reducer: {
-            [cartApi.reducerPath]: cartApi.reducer,
-        },
-        middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(cartApi.middleware),
-    });
+  const store = configureStore({
+    reducer: {
+      [cartApi.reducerPath]: cartApi.reducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(cartApi.middleware),
+  });
 
-    return store;
+  return store;
 };
 
 export const store = setupStore();

@@ -1,7 +1,7 @@
 import { cleanup, renderHook, waitFor } from '@testing-library/react';
 import { act, PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
-import { useAvailableProducts } from '../../../src/feat/get-available-products/lib/hooks/use-available-products';
+import { useAvailableProducts } from '../../../src/features/get-available-products/lib/hooks/use-available-products';
 import {
   MockFailingCartService,
   Product,

@@ -1,5 +1,5 @@
+import { useGetAvailableProductsQuery } from '../../model/slice';
 import { Product } from '../../../../shared/api/cart-service';
-import { useGetAvailableProductsQuery } from '../../../../entities/cart';
 
 export interface AvailableProductsResult {
   data: Readonly<Product[]> | undefined;

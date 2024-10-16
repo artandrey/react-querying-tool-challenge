@@ -1,8 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import { useAddProduct } from '../../../../feat/add-product';
-import { useCartProducts } from '../../../../feat/get-cart';
-import { useAvailableProducts } from '../../../../feat/get-available-products/lib/hooks/use-available-products';
+import { useAddProduct } from '../../../../features/add-product';
+import { useCartProducts } from '../../../../features/get-cart';
+import { useAvailableProducts } from '../../../../features/get-available-products/lib/hooks/use-available-products';
 import { Product } from '../../../../shared/api/cart-service';
 
 export const GoodsView: React.FC = () => {
