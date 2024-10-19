@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Product } from '../../shared/api/cart-service';
+import { Product } from '../../../shared/api/cart-service';
 
 export const cartApi = createApi({
   reducerPath: 'cartApi',
