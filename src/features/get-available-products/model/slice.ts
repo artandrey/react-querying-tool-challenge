@@ -5,10 +5,12 @@ import { Product } from '../../../shared/api/cart-service';
 export const extendedCartApi = cartApi.injectEndpoints({
   endpoints: (builder) => ({
     getAvailableProducts: builder.query<Readonly<Product[]>, void>({
-      queryFn: async () => {
-        const data = await api().cart.getAvailableProducts();
-        return { data };
-      },
+      query: () => ({
+        fn: async () => {
+          const data = await api().cart.getAvailableProducts();
+          return data;
+        },
+      }),
       providesTags: ['AvailableProducts'],
     }),
   }),
