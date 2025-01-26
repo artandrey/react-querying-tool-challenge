@@ -3,6 +3,7 @@ import {
   createApi,
   fakeBaseQuery,
   retry,
+  RetryOptions,
 } from '@reduxjs/toolkit/query/react';
 import { Product } from '../../../shared/api/cart-service';
 
@@ -21,7 +22,12 @@ export interface TestQueryArgs {
   fn: () => any;
 }
 
-export const baseQuery: BaseQueryFn<TestQueryArgs> = retry(
+export const baseQuery: BaseQueryFn<
+  TestQueryArgs,
+  unknown,
+  unknown,
+  RetryOptions
+> = retry(
   async (args, api, extraOptions) => {
     try {
       const response = await args.fn();
